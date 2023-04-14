@@ -1,5 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
+import csv
 
 from src.item import Item
 
@@ -19,3 +19,6 @@ def test_apply_discount():
     pencil = Item("pencil", 5, 10)
     pencil.apply_discount()
     assert pencil.price == 5
+
+
+

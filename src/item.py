@@ -1,6 +1,5 @@
 import csv
 
-import exception.exception
 from descriptors import descriptors
 
 
@@ -10,6 +9,7 @@ class Item:
     """
     __pay_rate = 1.0
     all = []
+    CSV_FILE = '../src/items.csv'
 
     name = descriptors.GoodsName()
     price = descriptors.GoodsPrice()
@@ -23,7 +23,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -42,6 +42,9 @@ class Item:
         """
         self.price = self.price * self.__pay_rate
 
+    def __str__(self):
+        return f"{self.name} {self.price} {self.quantity}"
+
     @classmethod
     def set_pay_rate(cls, new_rate) -> None:
 
@@ -59,12 +62,12 @@ class Item:
     #             cls.all.append((name, price, quantity))
 
     @classmethod
-    def instantiate_from_csv(cls, CSV_PATH='../src/items.csv') -> None:
+    def instantiate_from_csv(cls, CSV_PATH='../src/items.csv'):
         with open(CSV_PATH) as file:
             file_reader = csv.DictReader(file, delimiter=',')
             for i in file_reader:
-                cls.all.append(i)
-                # print(i)
+                name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
+                cls.all.append((name, price, quantity))
 
     @staticmethod
     def string_to_number(any_string: str) -> int:
