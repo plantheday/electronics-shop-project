@@ -21,4 +21,13 @@ def test_apply_discount():
     assert pencil.price == 5
 
 
+def test__str__():
+    laptop = Item("laptop", 50000, 2)
+    laptop.__str__()
+    assert laptop.__str__() == "laptop"
 
+
+def test__repr__():
+    laptop = Item("laptop", 50000, 2)
+    laptop.__repr__()
+    assert laptop.__repr__() == "Item('laptop', 50000, 2)"
